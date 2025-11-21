@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AUTUMN Link Hub</title>
+    
+    <!-- Google Font: Gowun Dodum (고운 돋움) --><link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* --- CSS Variables (Autumn Palette) --- */
+        :root {
+            --main-brown: #A0522D;      /* Sienna/Brown for primary elements */
+            --light-bg: #F5F5DC;        /* Beige background */
+            --text-color: #4F361E;      /* Dark Brown for text */
+        }
+
+        /* --- Global Styles --- */
+        body {
+            font-family: 'Gowun Dodum', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; 
+            min-height: 100vh; 
+        }
+
+        /* --- Top Section (Title & Date) --- */
+        .top-area {
+            text-align: center;
+            margin-bottom: 50px; 
+        }
+
+        .main-title {
+            font-size: 4em; 
+            font-weight: 700;
+            color: var(--main-brown);
+            margin-bottom: 10px;
+            letter-spacing: 0.05em; 
+        }
+
+        .current-date {
+            font-size: 1.2em;
+            color: var(--text-color);
+            font-weight: 700;
+            margin-bottom: 50px; 
+        }
+
+        /* --- Center Menu (Leaf Icons) --- */
+        .center-menu {
+            display: flex;
+            justify-content: center;
+            gap: 60px; 
+            margin-bottom: 80px; 
+        }
+
+        .menu-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            text-decoration: none; 
+            padding-bottom: 5px; 
+            border-bottom: 3px solid transparent; 
+        }
+        
+        .menu-item:hover {
+            opacity: 0.8;
+            border-bottom-color: var(--main-brown); 
+        }
+        
+        /* Icon Styles */
+        .menu-item .leaf-icon {
+            color: var(--main-brown);
+            font-size: 2.2em; 
+            margin-bottom: 8px;
+        }
+
+        /* Fall Leaf Color Hint */
+        .menu-item:nth-child(1) .leaf-icon {
+            color: #C70039; /* Reddish for JOURNAL */
+        }
+        
+        /* Ginkgo Leaf Color Hint */
+        .menu-item:nth-child(2) .leaf-icon {
+            color: #FFC300; /* Yellowish for RECORD */
+        }
+        
+        .menu-item .menu-text {
+            font-size: 1em;
+            font-weight: 700;
+            color: var(--text-color);
+            text-transform: uppercase; 
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 3em;
+            }
+            .current-date {
+                font-size: 1em;
+            }
+            .center-menu {
+                gap: 40px; 
+            }
+            .menu-item .leaf-icon {
+                font-size: 2em; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-area">
+        <h1 class="main-title">AUTUMN</h1>
+        <div id="currentDate" class="current-date"></div>
+    </div>
+        
+    <!-- Main Link Menu -->
+    <div class="center-menu">
+        <!-- JOURNAL Link -->
+        <a class="menu-item" href="https://www.instagram.com/tt.autumn_journal/" target="_blank">
+            <i class="fas fa-leaf leaf-icon"></i>
+            <span class="menu-text">JOURNAL</span>
+        </a>
+        <!-- RECORD Link -->
+        <a class="menu-item" href="https://www.instagram.com/tt.autumn_record/" target="_blank">
+            <i class="fas fa-seedling leaf-icon"></i>
+            <span class="menu-text">RECORD</span>
+        </a>
+    </div>
+
+    <!-- --- JavaScript for Real-time Date Update --- -->
+    <script>
+        const DATE_DIV = document.getElementById('currentDate');
+
+        // Function to update the date (YYYY / MM / DD / Day format)
+        function updateDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const dayNames = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
+            const dayOfWeek = dayNames[now.getDay()];
+
+            DATE_DIV.textContent = `${year} / ${month} / ${day} / ${dayOfWeek}`;
+        }
+
+        // Loop to update the date every second
+        function dateLoop() {
+            updateDate();
+            setTimeout(dateLoop, 1000); 
+        }
+        
+        // Start the loop when the window loads
+        window.onload = function () {
+            dateLoop();
+        };
+
+    </script>
+
+</body>
+</html>
